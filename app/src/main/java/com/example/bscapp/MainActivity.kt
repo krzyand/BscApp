@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         greeting = findViewById<TextView>(R.id.greetingTextView)
+        greeting.text = resources.getString(R.string.hello_unknown)
         editName = findViewById<EditText>(R.id.nameEditText)
 
         countResetTV = findViewById<TextView>(R.id.resetCountTextView)
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         val saveButton = findViewById<Button>(R.id.saveButton)
         val resetButton = findViewById<Button>(R.id.resetButton)
+
 
         saveButton.setOnClickListener {
             showGreeting()
@@ -38,15 +40,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun showGreeting() {
-        val greetingWithName = "Elo ${editName.text}"
-        greeting.text = greetingWithName
-        editName.text.clear()
-        countSave++
-        countSaveTV.text = countSave.toString()
+        if (editName.text.toString().isNotEmpty()) {
+            val greetingWithName = "Elo ${editName.text}"
+
+            greeting.text = greetingWithName
+            editName.text.clear()
+            countSave++
+            countSaveTV.text = countSave.toString()
+        }
     }
     private fun resetGreeting() {
         val defaultGreeting = resources.getString(R.string.hello_unknown)
-        if (greeting.text != defaultGreeting) {
+        val currentGreeting = greeting.text
+        if (currentGreeting != defaultGreeting ) {
             countReset++
             countResetTV.text = countReset.toString()
         }
