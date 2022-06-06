@@ -5,57 +5,47 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import com.example.bscapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    //  private lateinit var editTextName2: EditText
-    private lateinit var greeting: TextView
-    private lateinit var editName: EditText
-    private lateinit var countResetTV: TextView
-    private lateinit var countSaveTV: TextView
+    private lateinit var binding: ActivityMainBinding
 
     private var countReset: Int = 0
     private var countSave: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        greeting = findViewById<TextView>(R.id.greetingTextView)
-        greeting.text = resources.getString(R.string.hello_unknown)
-        editName = findViewById<EditText>(R.id.nameEditText)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        countResetTV = findViewById<TextView>(R.id.resetCountTextView)
-        countSaveTV = findViewById<TextView>(R.id.saveCountTextView)
+        binding.greetingTextView.text = resources.getString(R.string.hello_unknown)
 
-        val saveButton = findViewById<Button>(R.id.saveButton)
-        val resetButton = findViewById<Button>(R.id.resetButton)
-
-
-        saveButton.setOnClickListener {
+        binding.saveButton.setOnClickListener {
             showGreeting()
         }
-        resetButton.setOnClickListener {
+        binding.resetButton.setOnClickListener {
             resetGreeting()
         }
     }
     private fun showGreeting() {
-        if (editName.text.toString().isNotEmpty()) {
-            val greetingWithName = "Elo ${editName.text}"
+        if (binding.nameEditText.text.toString().isNotEmpty()) {
+            val greetingWithName = "Elo ${binding.nameEditText.text}"
 
-            greeting.text = greetingWithName
-            editName.text.clear()
+            binding.greetingTextView.text = greetingWithName
+            binding.nameEditText.text.clear()
             countSave++
-            countSaveTV.text = countSave.toString()
+            binding.saveCountTextView.text = countSave.toString()
         }
     }
     private fun resetGreeting() {
         val defaultGreeting = resources.getString(R.string.hello_unknown)
-        val currentGreeting = greeting.text
+        val currentGreeting = binding.greetingTextView.text
         if (currentGreeting != defaultGreeting ) {
             countReset++
-            countResetTV.text = countReset.toString()
+            binding.resetCountTextView.text = countReset.toString()
         }
-        greeting.text = defaultGreeting
+        binding.greetingTextView.text = defaultGreeting
     }
 }
