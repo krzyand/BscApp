@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BscApp</string>
+    <string name="reset">Reset</string>
+    <string name="hello_unknown">Hello Unknown</string>
+</resources>

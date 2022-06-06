@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/greetingTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:hint="@string/hello_unknown"
+        android:text=""
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20" />
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/greetingTextView"
+        app:layout_constraintStart_toStartOf="@+id/greetingTextView"
+        app:layout_constraintTop_toBottomOf="@+id/greetingTextView" />
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/reset"
+        app:layout_constraintStart_toStartOf="@+id/nameEditText"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="@+id/nameEditText"
+        app:layout_constraintTop_toTopOf="@+id/resetButton" />
+
+    <TextView
+        android:id="@+id/resetCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="@+id/resetButton"
+        app:layout_constraintStart_toStartOf="@+id/resetButton"
+        app:layout_constraintTop_toBottomOf="@+id/resetButton" />
+
+    <TextView
+        android:id="@+id/saveCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="@+id/saveButton"
+        app:layout_constraintStart_toStartOf="@+id/saveButton"
+        app:layout_constraintTop_toBottomOf="@+id/saveButton" />
+</androidx.constraintlayout.widget.ConstraintLayout>
