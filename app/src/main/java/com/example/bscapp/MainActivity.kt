@@ -30,22 +30,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun showGreeting() {
-        if (binding.nameEditText.text.toString().isNotEmpty()) {
-            val greetingWithName = "Elo ${binding.nameEditText.text}"
+        binding.apply {
+            if (nameEditText.text.toString().isNotEmpty()) {
+                val greetingWithName = "Elo ${nameEditText.text}"
 
-            binding.greetingTextView.text = greetingWithName
-            binding.nameEditText.text.clear()
-            countSave++
-            binding.saveCountTextView.text = countSave.toString()
+                greetingTextView.text = greetingWithName
+                nameEditText.text.clear()
+                countSave++
+                saveCountTextView.text = countSave.toString()
+            }
         }
     }
     private fun resetGreeting() {
         val defaultGreeting = resources.getString(R.string.hello_unknown)
         val currentGreeting = binding.greetingTextView.text
-        if (currentGreeting != defaultGreeting ) {
-            countReset++
-            binding.resetCountTextView.text = countReset.toString()
+        binding.apply {
+            if (currentGreeting != defaultGreeting ) {
+                countReset++
+                resetCountTextView.text = countReset.toString()
+            }
+            greetingTextView.text = defaultGreeting
         }
-        binding.greetingTextView.text = defaultGreeting
+
     }
 }
