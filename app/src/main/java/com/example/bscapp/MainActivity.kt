@@ -6,21 +6,24 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.bscapp.databinding.ActivityMainBinding
 import com.example.bscapp.viewmodels.MainViewModel
+import com.example.bscapp.viewmodels.MainViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
+    private lateinit var viewModelFactory: MainViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModelFactory = MainViewModelFactory(100, 100)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         binding.greetingTextView.text = resources.getString(R.string.hello_unknown)
-        binding.saveCountTextView.text = viewModel.getCountSave().toString()
-        binding.resetCountTextView.text = viewModel.getCountReset().toString()
+        binding.saveCountTextView.text = viewModel.getSaveCounter().toString()
+        binding.resetCountTextView.text = viewModel.getResetCounter().toString()
 
         binding.saveButton.setOnClickListener {
             showGreeting()
@@ -35,7 +38,8 @@ class MainActivity : AppCompatActivity() {
                 val greetingWithName = "Elo ${nameEditText.text}"
                 greetingTextView.text = greetingWithName
                 nameEditText.text.clear()
-                saveCountTextView.text = viewModel.getUpdatedSave().toString()
+                viewModel.setSaveCounter()
+                saveCountTextView.text = viewModel.getSaveCounter().toString()
             }
         }
     }
@@ -44,7 +48,8 @@ class MainActivity : AppCompatActivity() {
         val currentGreeting = binding.greetingTextView.text
         binding.apply {
             if (currentGreeting != defaultGreeting ) {
-                resetCountTextView.text = viewModel.getUpdatedReset().toString()
+                viewModel.setResetCounter()
+                resetCountTextView.text = viewModel.getResetCounter().toString()
             }
             greetingTextView.text = defaultGreeting
         }

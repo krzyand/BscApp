@@ -2,21 +2,23 @@ package com.example.bscapp.viewmodels
 
 import androidx.lifecycle.ViewModel
 
-class MainViewModel : ViewModel() {
-    private var countReset: Int = 0
-    private var countSave: Int = 0
+class MainViewModel(resetCounter: Int, saveCounter: Int) : ViewModel() {
 
-    fun getUpdatedSave(): Int {
-        return ++countSave
-    }
-    fun getUpdatedReset(): Int {
-        return ++countReset
+    private var resetCounter = 0
+    private var saveCounter = 0
+
+    init {
+        this.resetCounter = resetCounter
+        this.saveCounter =  saveCounter
     }
 
-    fun getCountReset(): Int {
-        return countReset
+    fun setSaveCounter() = ++saveCounter
+    fun setResetCounter() = ++resetCounter
+
+    fun getResetCounter(): Int {
+        return resetCounter
     }
-    fun getCountSave(): Int {
-        return countSave
+    fun getSaveCounter(): Int {
+        return saveCounter
     }
 }
